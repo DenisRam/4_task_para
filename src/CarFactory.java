@@ -1,60 +1,63 @@
+import java.util.ArrayList;
 import java.util.Random;
 
-/**
- * Created by Denis on 10.10.2018.
- */
 
 public class CarFactory {
 
-    private static String temp;
-    private static Random random;
+    private static int temp;
+    private static Random random = new Random();
 
 
-    private Car [] carPark (int a){
-        Car cars [] = new Car[a];
-        for (Car c: cars){
-            c = new Car(randomDrand(),
+    public static ArrayList <Car> carPark(int numbersOfCars){
+        ArrayList <Car> cars  = new ArrayList<>();
+        for (int i = 0; i < numbersOfCars; i++){
+            cars.add(new Car(randomDrand(),
                         randomModel(),
                         randomYear(),
                         randomColour(),
                         randomPrice(),
-                        randomRegistrationNumber());
+                        randomRegistrationNumber()));
         }
         return cars;
     }
 
-    private String randomDrand() {
-        switch (random.nextInt(4)){
+    private static String randomDrand() {
+
+        switch (random.nextInt(5)){
             case 0: {
-                return temp = "AUDI";
+                temp = 0;
+                return "AUDI";
             }
             case 1: {
-                return temp = "BMW";
+                temp = 1;
+                return "BMW";
             }
             case 2: {
-                return temp = "FORD";
+                temp = 2;
+                return "FORD";
             }
             case 3: {
-                return temp = "OPEL";
+                temp = 3;
+                return "OPEL";
             }
             default:{
-                return temp ="AUDI";
+                return "AUDI";
             }
         }
     }
 
-    private String randomModel(){
+    private static String randomModel(){
         switch (temp){
-            case "AUDI":{
+            case 0:{
                 return randomAudiModel();
             }
-            case "BMW":{
+            case 1:{
                 return randomBmwModel();
             }
-            case "FORD":{
+            case 2:{
                 return randomFordModel();
             }
-            case "OPEL":{
+            case 3:{
                 return randomOpelModel();
 
             }
@@ -62,11 +65,11 @@ public class CarFactory {
         return null;
     }
 
-    private int randomYear(){
+    private static int randomYear(){
         return 2000 + random.nextInt(18);
     }
 
-    private String randomColour(){
+    private static String randomColour(){
         switch (random.nextInt(4)){
             case 0: { return "Black";}
             case 1: { return "Yellow";}
@@ -76,15 +79,15 @@ public class CarFactory {
         }
     }
 
-    private Double randomPrice() {
-        return 15254.0 + random.nextDouble()*5000;
+    private static int randomPrice() {
+        return (int) (15254.0 + random.nextDouble()*5000);
     }
 
-    private String randomRegistrationNumber() {
-        return temp = String.valueOf(Math.round(random.nextDouble()*10000));
+    private static int randomRegistrationNumber() {
+        return (int)(Math.round(random.nextDouble()*10000));
     }
 
-    private String randomAudiModel(){
+    private static String randomAudiModel(){
         switch (random.nextInt(3)){
             case 0: { return "A1";}
             case 1: { return "A2";}
@@ -93,7 +96,7 @@ public class CarFactory {
         }
     }
 
-    private String randomBmwModel(){
+    private static String randomBmwModel(){
         switch (random.nextInt(3)){
             case 0: { return "M2";}
             case 1: { return "M3";}
@@ -102,7 +105,7 @@ public class CarFactory {
         }
     }
 
-    private String randomFordModel(){
+    private static String randomFordModel(){
         switch (random.nextInt(3)){
             case 0: { return "FIESTA";}
             case 1: { return "MONDEO";}
@@ -111,7 +114,7 @@ public class CarFactory {
         }
     }
 
-    private String randomOpelModel(){
+    private static String randomOpelModel(){
         switch (random.nextInt(3)){
             case 0: { return "ASTRA";}
             case 1: { return "GT";}
