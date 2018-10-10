@@ -1,8 +1,9 @@
 
 public class Car {
 
-     private static int ID = 0;
+     private static int idAll;
 
+     private int id;
      private String carBrand;
      private String model;
      private int year;
@@ -17,7 +18,7 @@ public class Car {
           this.colour = colour;
           this.price = price;
           this.registrationNumber = registrationNumber;
-          ID++;
+          this.id = ++idAll;
      }
 
      public String getCarBrand() {
@@ -36,9 +37,13 @@ public class Car {
           return price;
      }
 
-     @Override
+    public int getId() {
+        return id;
+    }
+
+    @Override
      public String toString() {
-          return new String(getCarBrand()
+          return new String("id:" + getId() + "|" + getCarBrand()
                   + "-" + getModel()
                   + " year:"+ getYear()
                   + " price:" + getPrice());
