@@ -1,19 +1,71 @@
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.time.LocalDateTime;
 
 
 public class CarOptions {
 
-    public static ArrayList<Car> showCarsByBrand(ArrayList<Car> cars) {
-        ArrayList<Car> car = new ArrayList<Car>();
-        //cars.stream().filter(car -> car.getPrice()>500);
-        return car;
+    private static final Scanner scanner = new Scanner(System.in);
+
+    static String InputString() {
+        return scanner.next();
     }
 
-    public static ArrayList<Car> showCarsByModelRideByYears(ArrayList<Car> cars) {
-        return null;
+    static int InputInt() {
+        return scanner.nextInt();
     }
 
-    public static ArrayList<Car> showCarsByYearWithLargerPrice(ArrayList<Car> cars) {
-        return null;
+    public static List<Car> showCarsByBrand(List<Car> cars) {
+        System.out.println("Введите Бренд:");
+        String findBrand = InputString();
+        return cars.stream()
+                .filter(car -> car.getCarBrand().equals(findBrand))
+                .collect(Collectors.toList());
+
     }
+
+    public static List<Car> showCarsByModelRideByYears(List<Car> cars) {
+        System.out.println("Введите Модель:");
+        String findModel = InputString();
+        System.out.println("Введите сколько лет эксплуатируются:");
+        int findYear = InputInt();
+        return cars.stream()
+                .filter(car -> car.getModel().equals(findModel))
+                .filter(car -> (LocalDateTime.now().getYear() - car.getYear()) > findYear)
+                .collect(Collectors.toList());
+    }
+
+    public static List<Car> showCarsByYearWithLargerPrice(List<Car> cars) {
+        System.out.println("Введите Год:");
+        int findYear = InputInt();
+        System.out.println("Введите Price:");
+        int findPrice = InputInt();
+        return cars.stream()
+                .filter(car -> car.getYear() == findYear)
+                .filter(car -> car.getPrice() < findPrice)
+                .collect(Collectors.toList());
+    }
+
+    /*
+    public static List<Car> Narkoman(List<Car> cars){
+        System.out.println("Введите Год:");
+        int findYear = InputInt();
+        System.out.println("Введите Price:");
+        int findPrice = InputInt();
+
+        List<Car> car1 = cars.stream()
+                 .filter(car -> car.getYear()>=findYear)
+                 .filter(car -> car.getPrice()<findPrice)
+                 .collect(Collectors.toList());
+
+        System.out.println(car1);
+
+        System.out.println("Введите Brand:");
+        String findBrand = InputString();
+        return  car1.stream()
+                .filter(car -> car.getCarBrand()==findBrand)
+                .collect(Collectors.toList());
+    }
+    */
 }
